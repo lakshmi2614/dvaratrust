@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+
+  <p>
+    <a href="{% url 'person_add' %}">Add person</a>
+  </p>
+
+  <p>
+    <a href="{% url 'import' %}">Import</a>
+  </p>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Name</th>
+
+        <th>Category</th>
+        <th>Subcategory</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for person in people %}
+        <tr>
+          <td><a href="{% url 'person_change' person.pk %}">{{ person.name }}</a></td>
+
+          <td>{{ person.category.name }}</td>
+          <td>{{ person.subcategory.name }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="4">No person in the database. <a href="{% url 'person_add' %}">Add the first person</a>.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}
